@@ -18,21 +18,44 @@
 | `testing-debugging` | 测试与调试：单元测试、UI 测试、Instruments | 写测试、调试问题 |
 | `code-style-guide` | 代码风格：Swift/ObjC 格式、命名、注释 | 代码格式、命名规范 |
 
-## 安装
+---
 
-### 从 GitHub 安装
+## 安装到你的项目
+
+### 方式 1：使用插件配置（推荐）
+
+在你的项目根目录创建 `.claude/settings.local.json`：
+
+```json
+{
+  "plugins": [
+    "creeveliu/ios-skills"
+  ]
+}
+```
+
+然后在 Claude Code 中运行：
 
 ```bash
 /plugin install ios-skills@creeveliu/ios-skills
 ```
 
-### 本地安装（开发测试用）
+### 方式 2：直接在 Claude Code 中安装
 
-技能文件已在 `skills/` 目录，可手动复制到目标项目：
+在任意项目的 Claude Code 会话中输入：
+
+```
+/plugin install ios-skills@creeveliu/ios-skills
+```
+
+### 方式 3：手动复制（开发测试用）
 
 ```bash
-cp -r skills/* /path/to/project/.claude/skills/
+cd /path/to/your-project
+cp -r /Users/cl/Projects/iOS-Skills/skills/* .claude/skills/
 ```
+
+---
 
 ## 使用
 
@@ -47,6 +70,8 @@ cp -r skills/* /path/to/project/.claude/skills/
 ```
 /skill swift-language
 ```
+
+---
 
 ## 技能分类
 
@@ -70,6 +95,8 @@ UI 开发
 ├── testing-debugging
 └── code-style-guide
 ```
+
+---
 
 ## 版本
 
