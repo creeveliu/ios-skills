@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.idea/
+.vscode/

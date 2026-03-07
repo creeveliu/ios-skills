@@ -1,0 +1,58 @@
+{
+  "name": "ios-skills",
+  "version": "2.0.0",
+  "description": "Comprehensive iOS development skills: architecture, UIKit, SwiftUI, Swift, Objective-C, networking, stability, performance, UX, and testing",
+  "author": {
+    "name": "Clify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/creeveliu/ios-skills"
+  },
+  "skills": [
+    {
+      "name": "ios-architecture",
+      "description": "iOS 应用架构：MVVM/MVC/VIPER、依赖注入、模块化设计"
+    },
+    {
+      "name": "uikit-best-practices",
+      "description": "UIKit 开发：ViewController、Auto Layout、TableView/CollectionView"
+    },
+    {
+      "name": "swiftui-best-practices",
+      "description": "SwiftUI 开发：状态管理、View 组合、声明式 UI"
+    },
+    {
+      "name": "swift-language",
+      "description": "Swift 语言：语法、内存管理、并发、泛型、协议"
+    },
+    {
+      "name": "objective-c-language",
+      "description": "Objective-C 语言：ARC、Blocks、Categories、Runtime、Swift 混编"
+    },
+    {
+      "name": "networking-data",
+      "description": "网络与数据：URLSession、Codable、本地存储、CoreData"
+    },
+    {
+      "name": "app-stability",
+      "description": "稳定性与崩溃：崩溃预防、异常处理、线程安全、防御性编程"
+    },
+    {
+      "name": "performance-optimization",
+      "description": "性能优化：启动优化、内存管理、渲染性能、电量优化"
+    },
+    {
+      "name": "user-experience",
+      "description": "用户体验：动画、触觉反馈、无障碍、深色模式、本地化"
+    },
+    {
+      "name": "testing-debugging",
+      "description": "测试与调试：单元测试、UI 测试、XCTest、Instruments、LLDB"
+    },
+    {
+      "name": "code-style-guide",
+      "description": "代码风格：Swift/ObjC 格式、命名规范、注释、文件组织"
+    }
+  ]
+}
