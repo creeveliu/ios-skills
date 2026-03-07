@@ -22,36 +22,31 @@
 
 ## 安装到你的项目
 
-### 方式 1：使用插件配置（推荐）
-
-在你的项目根目录创建 `.claude/settings.local.json`：
-
-```json
-{
-  "plugins": [
-    "creeveliu/ios-skills"
-  ]
-}
-```
-
-然后在 Claude Code 中运行：
-
-```bash
-/plugin install ios-skills@creeveliu/ios-skills
-```
-
-### 方式 2：直接在 Claude Code 中安装
-
-在任意项目的 Claude Code 会话中输入：
-
-```
-/plugin install ios-skills@creeveliu/ios-skills
-```
-
-### 方式 3：手动复制（开发测试用）
+### 方式 1：使用 gh 命令（推荐）
 
 ```bash
 cd /path/to/your-project
+mkdir -p .claude/skills
+gh repo clone creeveliu/ios-skills /tmp/ios-skills
+cp -r /tmp/ios-skills/skills/* .claude/skills/
+rm -rf /tmp/ios-skills
+```
+
+### 方式 2：使用 git clone
+
+```bash
+cd /path/to/your-project
+mkdir -p .claude/skills
+git clone https://github.com/creeveliu/ios-skills.git /tmp/ios-skills
+cp -r /tmp/ios-skills/skills/* .claude/skills/
+rm -rf /tmp/ios-skills
+```
+
+### 方式 3：本地技能包（开发测试用）
+
+```bash
+cd /path/to/your-project
+mkdir -p .claude/skills
 cp -r /Users/cl/Projects/iOS-Skills/skills/* .claude/skills/
 ```
 
