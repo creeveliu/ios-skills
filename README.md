@@ -22,32 +22,24 @@
 
 ## 安装到你的项目
 
-### 方式 1：使用 gh 命令（推荐）
+### 方式一：通过 Marketplace（推荐）
 
-```bash
-cd /path/to/your-project
-mkdir -p .claude/skills
-gh repo clone creeveliu/ios-skills /tmp/ios-skills
-cp -r /tmp/ios-skills/skills/* .claude/skills/
-rm -rf /tmp/ios-skills
+1. 添加 marketplace：
+
+```
+/plugin marketplace add creeveliu/ios-skills
 ```
 
-### 方式 2：使用 git clone
+2. 安装插件：
 
-```bash
-cd /path/to/your-project
-mkdir -p .claude/skills
-git clone https://github.com/creeveliu/ios-skills.git /tmp/ios-skills
-cp -r /tmp/ios-skills/skills/* .claude/skills/
-rm -rf /tmp/ios-skills
+```
+/plugin install ios-skills@ios-skills-marketplace
 ```
 
-### 方式 3：本地技能包（开发测试用）
+### 方式二：直接安装
 
-```bash
-cd /path/to/your-project
-mkdir -p .claude/skills
-cp -r /Users/cl/Projects/iOS-Skills/skills/* .claude/skills/
+```
+/plugin install ios-skills@creeveliu/ios-skills
 ```
 
 ---
@@ -96,6 +88,11 @@ UI 开发
 ## 版本
 
 当前版本：2.0.0
+
+## 仓库
+
+- 主仓库：https://github.com/creeveliu/ios-skills
+- Marketplace: https://github.com/creeveliu/ios-skills-marketplace
 
 ## 许可
 

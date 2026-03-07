@@ -1,0 +1,26 @@
+{
+  "name": "ios-skills-marketplace",
+  "owner": {
+    "name": "Clify"
+  },
+  "metadata": {
+    "description": "iOS 开发最佳实践技能包 - 涵盖架构、UIKit、SwiftUI、Swift、Objective-C 等",
+    "version": "2.0.0"
+  },
+  "plugins": [
+    {
+      "name": "ios-skills",
+      "source": "./",
+      "description": "全面的 iOS 开发最佳实践技能包",
+      "version": "2.0.0",
+      "author": {
+        "name": "Clify"
+      },
+      "repository": "https://github.com/creeveliu/ios-skills",
+      "license": "MIT",
+      "keywords": ["ios", "swift", "swiftui", "uikit", "mobile", "development"],
+      "category": "development",
+      "skills": "./skills"
+    }
+  ]
+}
