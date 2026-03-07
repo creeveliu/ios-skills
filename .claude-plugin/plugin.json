@@ -5,12 +5,8 @@
   "author": {
     "name": "Clify"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/creeveliu/ios-skills.git"
-  },
+  "repository": "https://github.com/creeveliu/ios-skills",
   "license": "MIT",
   "keywords": ["ios", "swift", "swiftui", "uikit", "mobile", "development"],
-  "category": "development",
   "skills": "./skills"
 }

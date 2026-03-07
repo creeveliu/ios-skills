@@ -19,7 +19,6 @@
       "repository": "https://github.com/creeveliu/ios-skills",
       "license": "MIT",
       "keywords": ["ios", "swift", "swiftui", "uikit", "mobile", "development"],
-      "category": "development",
       "skills": "./skills"
     }
   ]
