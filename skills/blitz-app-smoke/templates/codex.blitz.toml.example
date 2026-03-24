@@ -1,0 +1,21 @@
+# 把真实配置复制到仓库根目录，并命名为 `codex.blitz.toml`。
+
+# 可选：显式指定 workspace 或 project。
+# workspace_path = "App.xcworkspace"
+# project_path = "App.xcodeproj"
+
+# 可选：用于消除 scheme 选择歧义。
+# scheme = "App"
+
+# 可选：指定模拟器名称。
+# simulator_name = "iPhone 17"
+
+# 可选：指定仓库中的测试手册路径。
+# manual_path = "docs/testing/smoke.yaml"
+
+# 可选：是否允许回退到 skill 内置的默认手册。
+# allow_default_manual = true
+
+# 可选：如果需要，可跳过有实际内容的现有测试。
+# skip_unit_tests = false
+# skip_ui_tests = false

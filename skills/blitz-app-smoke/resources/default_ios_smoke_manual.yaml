@@ -1,0 +1,12 @@
+name: default_ios_smoke
+steps:
+  - action: launch_app
+    expect: app launches successfully
+  - action: inspect_visible_ui
+    expect: main surface is visible
+  - action: interact_primary_navigation
+    expect: at least one primary navigation control responds
+  - action: scroll_primary_content
+    expect: main content region scrolls without crashing
+  - action: capture_screenshot
+    expect: screenshot artifact is recorded
