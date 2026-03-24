@@ -11,7 +11,7 @@ Usage: run.sh <command>
 Commands:
   prepare   Check environment and bootstrap Blitz
   discover  Detect project, scheme, and related metadata
-  test      Run meaningful existing tests
+  test      Inspect or run meaningful existing tests
   blitz     Execute Blitz-driven app flow
   report    Print the latest unified report
   run       Execute the full end-to-end workflow
@@ -106,6 +106,20 @@ config_bool_enabled() {
       ;;
     *)
       return 1
+      ;;
+  esac
+}
+
+existing_tests_policy() {
+  local raw=""
+  raw="$(config_value existing_tests_policy || true)"
+
+  case "$raw" in
+    run|skip|prompt)
+      printf '%s\n' "$raw"
+      ;;
+    *)
+      printf 'prompt\n'
       ;;
   esac
 }
@@ -428,6 +442,42 @@ status_for_targets() {
   fi
 }
 
+detection_for_targets() {
+  local mode="$1"
+  shift
+  local targets=("$@")
+  local target=""
+  local dir=""
+  local classification=""
+  local saw_template=0
+
+  for target in "${targets[@]}"; do
+    [[ -n "$target" ]] || continue
+    dir="$PWD/$target"
+    if [[ "$mode" == "unit" ]]; then
+      classification="$(classify_unit_test_dir "$dir")"
+    else
+      classification="$(classify_ui_test_dir "$dir")"
+    fi
+
+    case "$classification" in
+      meaningful)
+        echo "meaningful"
+        return 0
+        ;;
+      template-only)
+        saw_template=1
+        ;;
+    esac
+  done
+
+  if [[ $saw_template -eq 1 ]]; then
+    echo "template-only"
+  else
+    echo "not-found"
+  fi
+}
+
 test_command() {
   local selected_path=""
   local selected_kind=""
@@ -439,11 +489,15 @@ test_command() {
   local ui_targets=()
   local unit_status=""
   local ui_status=""
+  local unit_detection=""
+  local ui_detection=""
+  local policy=""
 
   selected_path="$(discover_candidate_path)"
   selected_kind="$(project_kind_for_path "$selected_path")"
   selected_scheme="$(discover_scheme_for_path "$selected_path")"
   simulator="$(runner_simulator_name)"
+  policy="$(existing_tests_policy)"
 
   while IFS= read -r target; do
     [[ -n "$target" ]] || continue
@@ -458,20 +512,32 @@ test_command() {
     fi
   done
 
+  unit_detection="$(detection_for_targets unit "${unit_targets[@]}")"
+  ui_detection="$(detection_for_targets ui "${ui_targets[@]}")"
+
   if config_bool_enabled skip_unit_tests; then
     unit_status="skipped (config)"
+  elif [[ "$policy" == "skip" && "$unit_detection" == "meaningful" ]]; then
+    unit_status="skipped (policy)"
+  elif [[ "$policy" == "prompt" && "$unit_detection" == "meaningful" ]]; then
+    unit_status="prompt-required"
   else
     unit_status="$(status_for_targets "$selected_kind" "$selected_path" "$selected_scheme" "$simulator" unit "${unit_targets[@]}")"
   fi
 
   if config_bool_enabled skip_ui_tests; then
     ui_status="skipped (config)"
+  elif [[ "$policy" == "skip" && "$ui_detection" == "meaningful" ]]; then
+    ui_status="skipped (policy)"
+  elif [[ "$policy" == "prompt" && "$ui_detection" == "meaningful" ]]; then
+    ui_status="prompt-required"
   else
     ui_status="$(status_for_targets "$selected_kind" "$selected_path" "$selected_scheme" "$simulator" ui "${ui_targets[@]}")"
   fi
 
   printf 'unit_tests=%s\n' "$unit_status"
   printf 'ui_tests=%s\n' "$ui_status"
+  printf 'existing_tests_policy=%s\n' "$policy"
 }
 
 resolver_project_root() {
@@ -796,6 +862,17 @@ run_command() {
   prepare_environment
   discover_output="$(discover_command)"
   test_output="$(test_command)"
+
+  if printf '%s\n' "$test_output" | grep -q 'prompt-required'; then
+    cat >&2 <<'EOF'
+Meaningful existing tests were detected.
+Ask the user whether to run them or skip them, then either:
+- set existing_tests_policy = "run" in codex.blitz.toml
+- set existing_tests_policy = "skip" in codex.blitz.toml
+- or use skip_unit_tests / skip_ui_tests for finer control
+EOF
+    return 2
+  fi
 
   set +e
   blitz_output="$(run_blitz_flow 2>&1)"

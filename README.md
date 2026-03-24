@@ -41,7 +41,7 @@ npx skills add creeveliu/ios-skills
 - skill 会在当前项目目录自动探测 iOS 工程
 - 如果缺少 Blitz，会直接提示用户按官方方式安装
 - 如果项目里有测试手册，优先按测试手册执行
-- 如果项目里有有实际内容的 unit test 或 UI test，会先执行，但不会阻塞后续 Blitz 验收
+- 如果项目里有有实际内容的 unit test 或 UI test，会先提示用户是运行还是跳过，不会默认执行
 
 ## 版本
 

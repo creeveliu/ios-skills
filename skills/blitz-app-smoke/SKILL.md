@@ -31,13 +31,14 @@ Blitz 是强依赖。
 bash run.sh run
 ```
 
-orchestrator 负责：
+脚本负责：
 
 - 环境检查
 - Blitz bootstrap
 - iOS 工程探测
 - 可选的 Xcode MCP 辅助探测
-- 现有测试识别与执行
+- 现有测试识别
+- 在得到用户确认后执行现有测试
 - 测试手册解析
 - Blitz 执行
 - 统一报告输出
@@ -50,13 +51,16 @@ orchestrator 负责：
 2. 从这个 skill 目录运行 `run.sh` 的 `prepare` 或 `run`。
 3. 如果缺少 Blitz，立即报错，并提示用户从官方来源安装。
 4. 如果项目里存在测试手册，优先按手册执行。
-5. 在执行 Blitz 前，先跑有实际内容的单元测试和 UI 测试。
-6. 即使这些测试失败，也继续执行 Blitz。
-7. 最终返回一份合并结果，明确标出 `passed`、`failed`、`skipped`。
+5. 如果检测到有实际内容的单元测试或 UI 测试，先提示用户是要运行还是跳过。
+6. 只有在用户明确选择后，才执行这些现有测试。
+7. 即使这些测试失败，也继续执行 Blitz。
+8. 最终返回一份合并结果，明确标出 `passed`、`failed`、`skipped`。
 
 ## 现有测试规则
 
 只执行对当前项目有实际覆盖价值的测试。
+
+如果检测到这类测试，不要默认运行，先提示用户是否跳过。
 
 只有模板内容的 Xcode 测试必须报告为：
 
@@ -84,6 +88,7 @@ orchestrator 负责：
 - 测试手册路径
 - 是否允许回退到内置默认手册
 - 是否跳过 unit tests 或 UI tests
+- `existing_tests_policy = "prompt" | "run" | "skip"`
 
 示例配置见 [templates/codex.blitz.toml.example](templates/codex.blitz.toml.example)
 

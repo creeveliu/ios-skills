@@ -19,3 +19,9 @@
 # 可选：如果需要，可跳过有实际内容的现有测试。
 # skip_unit_tests = false
 # skip_ui_tests = false
+
+# 可选：现有测试的默认策略。
+# prompt: 检测到有实际内容的测试时，先停下来，等用户决定
+# run: 自动执行现有测试
+# skip: 自动跳过现有测试
+# existing_tests_policy = "prompt"
