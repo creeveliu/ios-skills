@@ -40,16 +40,13 @@ check_simctl() {
 }
 
 install_blitz() {
-  local install_cmd="${BLITZ_INSTALL_CMD:-npm install -g blitz}"
-
-  echo "Blitz not found. Installing with npm..."
-  if ! bash -lc "$install_cmd"; then
-    cat >&2 <<'EOF'
-Blitz installation failed.
-Check network connectivity, proxy settings, and npm registry availability, then retry.
+  cat >&2 <<'EOF'
+Blitz is not installed.
+Install Blitz from the official website or the official GitHub repository, then retry:
+- https://blitz.dev
+- https://github.com/blitzdotdev/blitz-mac
 EOF
-    return 1
-  fi
+  return 1
 }
 
 ensure_blitz() {
@@ -58,11 +55,6 @@ ensure_blitz() {
   fi
 
   install_blitz || return 1
-
-  if ! PATH="$(lookup_path)" command -v blitz >/dev/null 2>&1; then
-    echo "Blitz installation failed." >&2
-    return 1
-  fi
 }
 
 prepare_environment() {

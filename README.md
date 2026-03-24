@@ -39,8 +39,7 @@ npx skills add creeveliu/ios-skills
 
 - 用户只需要说一句：`帮我测一下这个 App`
 - skill 会在当前项目目录自动探测 iOS 工程
-- 如果缺少 Blitz，会通过 `npm` 自动安装
-- 安装失败会直接终止，并提示检查网络、代理和 npm registry
+- 如果缺少 Blitz，会直接提示用户按官方方式安装
 - 如果项目里有测试手册，优先按测试手册执行
 - 如果项目里有有实际内容的 unit test 或 UI test，会先执行，但不会阻塞后续 Blitz 验收
 

@@ -31,7 +31,7 @@ npx skills add creeveliu/ios-skills
 
 - 通过自然语言触发，例如：`帮我测一下这个 App`
 - 自动探测工程、scheme、测试手册和现有测试
-- 缺少 Blitz 时自动用 `npm` 安装
+- 缺少 Blitz 时提示按官方方式安装
 - Blitz 安装失败直接终止，不降级
 
 ## 版本
